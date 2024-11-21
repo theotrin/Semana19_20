@@ -15,14 +15,14 @@ class _CharacterState extends State<Character> {
 
   void incrementLife() {
     setState(() {
-      this.lifePoints += 10;
+      lifePoints += 10;
     });
   }
 
   void decrementLife() {
     setState(() {
       if (lifePoints > 0) {
-        this.lifePoints -= 10;
+        lifePoints -= 10;
       }
     });
   }
@@ -30,85 +30,95 @@ class _CharacterState extends State<Character> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          Stack(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        height: 200,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(9), color: Colors.blue),
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+              Stack(
                 children: [
-                  Row(
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(
-                        width: 80,
-                        height: 80,
-                        child: Image.network(
-                          widget.imgUrl,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      const SizedBox(
-                          width: 20), // Espaçamento entre a imagem e o texto
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      Row(
                         children: [
-                          Text(
-                            "Nome: ${widget.name}",
-                            style: TextStyle(fontSize: 22),
+                          SizedBox(
+                            width: 80,
+                            height: 80,
+                            child: Image.network(
+                              widget.imgUrl,
+                              fit: BoxFit.cover,
+                            ),
                           ),
                           const SizedBox(
-                              height: 10), // Espaçamento entre os textos
-                          Text(
-                            'Raça: ${widget.race}',
-                            style: TextStyle(fontSize: 22),
+                              width:
+                                  20), // Espaçamento entre a imagem e o texto
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Nome: ${widget.name}",
+                                style: TextStyle(fontSize: 22),
+                              ),
+                              const SizedBox(
+                                  height: 10), // Espaçamento entre os textos
+                              Text(
+                                'Raça: ${widget.race}',
+                                style: TextStyle(fontSize: 22),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  Positioned(
+                    bottom: 20,
+                    right: 20,
+                    child: Text(
+                      'Vida: ${this.lifePoints}',
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: [
+                          FloatingActionButton(
+                            onPressed: decrementLife,
+                            tooltip: 'Decrementar Vida',
+                            child: Icon(Icons.remove),
+                          ),
+                          SizedBox(width: 10),
+                          FloatingActionButton(
+                            onPressed: incrementLife,
+                            tooltip: 'Incrementar Vida',
+                            child: Icon(Icons.add),
                           ),
                         ],
                       ),
                     ],
                   ),
                 ],
-              ),
-              Positioned(
-                bottom: 20,
-                right: 20,
-                child: Text(
-                  'Vida: ${this.lifePoints}',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                ),
-              ),
+              )
             ],
           ),
-          SizedBox(
-            height: 20,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      FloatingActionButton(
-                        onPressed: decrementLife,
-                        tooltip: 'Decrementar Vida',
-                        child: Icon(Icons.remove),
-                      ),
-                      SizedBox(width: 10),
-                      FloatingActionButton(
-                        onPressed: incrementLife,
-                        tooltip: 'Incrementar Vida',
-                        child: Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ],
-          )
-        ],
+        ),
       ),
     );
   }
