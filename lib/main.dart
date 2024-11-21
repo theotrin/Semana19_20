@@ -38,8 +38,10 @@ class _CharacterScreenState extends State<CharacterScreen> {
       ),
       body: ListView(
         children: [
-          Character("Aragon", "humano"),
-          Character("Aragon", "humano"),
+          Character("Sonic", "Ouriço",
+              "https://images.gamebanana.com/img/ss/concepts/65dc33b363110.jpg"),
+          Character("Shadow", "Ouriço",
+              "https://i.pinimg.com/736x/14/37/4f/14374f6454e77e82c48051a3bb61dd9c.jpg"),
         ],
       ),
     );
