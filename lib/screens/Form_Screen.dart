@@ -1,7 +1,10 @@
+import 'package:challenger/data/character_inherited.dart';
 import 'package:flutter/material.dart';
 
 class FormScreen extends StatefulWidget {
-  const FormScreen({super.key});
+  const FormScreen({super.key, required this.characterContext});
+
+  final BuildContext characterContext;
 
   @override
   State<FormScreen> createState() => _FormScreenState();
@@ -9,7 +12,7 @@ class FormScreen extends StatefulWidget {
 
 class _FormScreenState extends State<FormScreen> {
   TextEditingController characterNameController = TextEditingController();
-  TextEditingController characterSpeedController = TextEditingController();
+  TextEditingController characterTypeController = TextEditingController();
   TextEditingController characterUrlController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   @override
@@ -60,15 +63,13 @@ class _FormScreenState extends State<FormScreen> {
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
                       textAlign: TextAlign.center,
-                      validator: (value) {
-                        if (value!.isEmpty ||
-                            int.parse(value) > 5 ||
-                            int.parse(value) < 1) {
-                          return 'Insira a velocidade entre 1 e 5';
+                      validator: (String? value) {
+                        if (value != null && value.isEmpty) {
+                          return 'Insira um tipo para o personagem';
                         }
+                        return null;
                       },
-                      controller: characterSpeedController,
-                      keyboardType: TextInputType.number,
+                      controller: characterTypeController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: 'Velocidade',
@@ -80,6 +81,9 @@ class _FormScreenState extends State<FormScreen> {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextFormField(
+                      onChanged: (value) {
+                        setState(() {});
+                      },
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Por favor insira uma URL válida';
@@ -100,29 +104,39 @@ class _FormScreenState extends State<FormScreen> {
                     height: 100,
                     width: 72,
                     decoration: BoxDecoration(
-                        color: Colors.lightBlue,
-                        borderRadius: BorderRadius.circular(10),
-                        border: Border.all(width: 2, color: Colors.lightBlue)),
+                      color: Colors.lightBlue,
+                      borderRadius: BorderRadius.circular(10),
+                      border: Border.all(width: 2, color: Colors.lightBlue),
+                    ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(10),
-                      child: Image.network(
-                        characterUrlController.text,
-                        errorBuilder: (BuildContext context, Object exception,
-                            StackTrace? stackTrace) {
-                          return Image.asset(
-                            'assets/images/empty_image.png',
-                          );
-                        },
-                        fit: BoxFit.cover,
-                      ),
+                      child: characterUrlController.text.isNotEmpty
+                          ? Image.network(
+                              characterUrlController.text,
+                              fit: BoxFit.cover,
+                              errorBuilder: (BuildContext context,
+                                  Object exception, StackTrace? stackTrace) {
+                                return Image.asset(
+                                  'assets/images/empty_image.png',
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                            )
+                          : Image.asset(
+                              'assets/images/empty_image.png',
+                              fit: BoxFit.cover,
+                            ),
                     ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
-                        print(this.characterNameController.text);
-                        print(this.characterUrlController.text);
-                        print(this.characterSpeedController.text);
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Salvando novo personagem...'),
+                          ),
+                        );
+                        Navigator.pop(context);
                       }
                     },
                     style: const ButtonStyle(
@@ -132,7 +146,7 @@ class _FormScreenState extends State<FormScreen> {
                     child: const Text(
                       'Adcionar!',
                     ),
-                  ),
+                  ), //https://i.pinimg.com/1200x/9b/21/08/9b2108ae48a97e48efaa2bafb0b79b28.jpg
                 ],
               ),
             ),

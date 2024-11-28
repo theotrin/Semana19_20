@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 
 class Character extends StatefulWidget {
   final String name;
-  final String race;
+  final String type;
   final String imgUrl;
-  const Character(this.name, this.race, this.imgUrl, {super.key});
+
+  const Character(this.name, this.type, this.imgUrl, {super.key});
 
   @override
   State<Character> createState() => _CharacterState();
@@ -47,12 +48,13 @@ class _CharacterState extends State<Character> {
                       Row(
                         children: [
                           ClipRRect(
-                            child: Container(
+                            child: SizedBox(
                               width: 80,
                               height: 80,
-                              child: Image.network(
+                              child: Image.asset(
                                 widget.imgUrl,
                                 fit: BoxFit.cover,
+                                excludeFromSemantics: true,
                               ),
                             ),
                           ),
@@ -67,7 +69,7 @@ class _CharacterState extends State<Character> {
                                   style: const TextStyle(fontSize: 22),
                                 ),
                                 Text(
-                                  'Tipo: ${widget.race}',
+                                  'Tipo: ${widget.type}',
                                   style: const TextStyle(fontSize: 22),
                                 ),
                                 Text(

@@ -1,6 +1,7 @@
 import 'package:challenger/components/character.dart';
-import 'package:challenger/screens/CharacterScreen.dart';
-import 'package:challenger/screens/Form_Screen.dart';
+import 'package:challenger/data/character_inherited.dart';
+import 'package:challenger/screens/character_screen.dart';
+import 'package:challenger/screens/form_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -15,6 +16,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: const FormScreen());
+        home: CharacterInherited(child: const CharacterScreen()));
   }
 }
