@@ -73,7 +73,7 @@ class _FormScreenState extends State<FormScreen> {
                       controller: characterTypeController,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Velocidade',
+                        hintText: 'Tipo do personagem',
                         fillColor: Colors.white70,
                         filled: true,
                       ),

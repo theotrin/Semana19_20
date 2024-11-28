@@ -67,8 +67,8 @@ class _CharacterState extends State<Character> {
                                     ))
                                 : Image.network(
                                     widget.imgUrl,
-                                    height: 100,
-                                    width: 72,
+                                    width: 80,
+                                    height: 80,
                                     fit: BoxFit.cover,
                                   ),
                           ),
