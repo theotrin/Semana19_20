@@ -9,29 +9,29 @@ class CharacterScreen extends StatefulWidget {
 }
 
 class _CharacterScreenState extends State<CharacterScreen> {
-  @override
   bool opacidade = true;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Flutter semana 19 e 20'),
+          title: const Text('Personagens Sonic'),
         ),
         body: AnimatedOpacity(
           opacity: opacidade ? 1 : 0,
           duration: const Duration(seconds: 1),
           child: ListView(
-            children: [
-              Character("Sonic", "Ouriço",
+            children: const [
+              Character("Sonic", "Velocidade",
                   "https://images.gamebanana.com/img/ss/concepts/65dc33b363110.jpg"),
-              Character("Shadow", "Ouriço",
+              Character("Shadow", "Velocidade",
                   "https://i.pinimg.com/736x/14/37/4f/14374f6454e77e82c48051a3bb61dd9c.jpg"),
-              Character("Amy", "Ouriço",
+              Character("Amy", "Força",
                   "https://i.pinimg.com/originals/27/8c/64/278c64865990c41a1339b07ded92daa8.jpg"),
-              Character("Tails", "Raposa",
+              Character("Tails", "Voador",
                   "https://i.pinimg.com/474x/0f/a0/1a/0fa01a092f79397a7527f3ecae9c8640.jpg"),
-              Character("Blaze", "Ouriço",
+              Character("Blaze", "Voador",
                   "https://preview.redd.it/lc5kap16hoxb1.jpg?auto=webp&s=73f6748d9545faba08fec4813b9d2ddb03951c67"),
-              Character("Jet", "Ouriço",
+              Character("Jet", "Velocidade",
                   "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/b8919e7a-2bb5-40c7-af15-8218d853bd92/d4pkl57-24716206-3024-4244-a279-404235e2b127.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2I4OTE5ZTdhLTJiYjUtNDBjNy1hZjE1LTgyMThkODUzYmQ5MlwvZDRwa2w1Ny0yNDcxNjIwNi0zMDI0LTQyNDQtYTI3OS00MDQyMzVlMmIxMjcucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.zcbs3V5Rw_41CapTBWBUEQzzLIwjJy7Cj0mA3f0smmY"),
               SizedBox(
                 height: 80,

@@ -13,7 +13,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Semana 19 e 20',
         theme: ThemeData(primarySwatch: Colors.blue),
         home: CharacterScreen());
   }

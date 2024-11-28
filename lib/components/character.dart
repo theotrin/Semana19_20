@@ -11,18 +11,18 @@ class Character extends StatefulWidget {
 }
 
 class _CharacterState extends State<Character> {
-  int lifePoints = 100;
+  int speedPoints = 100;
 
   void incrementLife() {
     setState(() {
-      lifePoints += 10;
+      speedPoints += 10;
     });
   }
 
-  void decrementLife() {
+  void decrementSpeed() {
     setState(() {
-      if (lifePoints > 0) {
-        lifePoints -= 10;
+      if (speedPoints > 0) {
+        speedPoints -= 10;
       }
     });
   }
@@ -46,52 +46,47 @@ class _CharacterState extends State<Character> {
                     children: [
                       Row(
                         children: [
-                          SizedBox(
-                            width: 80,
-                            height: 80,
-                            child: Image.network(
-                              widget.imgUrl,
-                              fit: BoxFit.cover,
+                          ClipRRect(
+                            child: Container(
+                              width: 80,
+                              height: 80,
+                              child: Image.network(
+                                widget.imgUrl,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
-                          const SizedBox(
-                              width:
-                                  20), // Espaçamento entre a imagem e o texto
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "Nome: ${widget.name}",
-                                style: TextStyle(fontSize: 22),
-                              ),
-                              const SizedBox(
-                                  height: 10), // Espaçamento entre os textos
-                              Text(
-                                'Raça: ${widget.race}',
-                                style: TextStyle(fontSize: 22),
-                              ),
-                            ],
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Nome: ${widget.name}',
+                                  style: const TextStyle(fontSize: 22),
+                                ),
+                                Text(
+                                  'Tipo: ${widget.race}',
+                                  style: const TextStyle(fontSize: 22),
+                                ),
+                                Text(
+                                  'Velocidade: $speedPoints',
+                                  style: const TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
                     ],
                   ),
-                  Positioned(
-                    bottom: 20,
-                    right: 20,
-                    child: Text(
-                      'Vida: ${this.lifePoints}',
-                      style:
-                          TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                    ),
-                  ),
                 ],
               ),
-              SizedBox(
-                height: 20,
-              ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -100,15 +95,15 @@ class _CharacterState extends State<Character> {
                       Row(
                         children: [
                           FloatingActionButton(
-                            onPressed: decrementLife,
+                            onPressed: decrementSpeed,
                             tooltip: 'Decrementar Vida',
-                            child: Icon(Icons.remove),
+                            child: const Icon(Icons.remove),
                           ),
-                          SizedBox(width: 10),
+                          const SizedBox(width: 8),
                           FloatingActionButton(
                             onPressed: incrementLife,
                             tooltip: 'Incrementar Vida',
-                            child: Icon(Icons.add),
+                            child: const Icon(Icons.add),
                           ),
                         ],
                       ),
