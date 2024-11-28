@@ -5,7 +5,8 @@ class Character extends StatefulWidget {
   final String type;
   final String imgUrl;
 
-  const Character(this.name, this.type, this.imgUrl, {super.key});
+  const Character(this.name, this.type, this.imgUrl, {Key? key})
+      : super(key: key);
 
   @override
   State<Character> createState() => _CharacterState();
@@ -14,7 +15,14 @@ class Character extends StatefulWidget {
 class _CharacterState extends State<Character> {
   int speedPoints = 100;
 
-  void incrementLife() {
+  bool assertOrNetwork() {
+    if (widget.imgUrl.contains('http')) {
+      return false;
+    }
+    return true;
+  }
+
+  void incrementSpeed() {
     setState(() {
       speedPoints += 10;
     });
@@ -48,15 +56,21 @@ class _CharacterState extends State<Character> {
                       Row(
                         children: [
                           ClipRRect(
-                            child: SizedBox(
-                              width: 80,
-                              height: 80,
-                              child: Image.asset(
-                                widget.imgUrl,
-                                fit: BoxFit.cover,
-                                excludeFromSemantics: true,
-                              ),
-                            ),
+                            child: assertOrNetwork()
+                                ? SizedBox(
+                                    width: 80,
+                                    height: 80,
+                                    child: Image.asset(
+                                      widget.imgUrl,
+                                      fit: BoxFit.cover,
+                                      excludeFromSemantics: true,
+                                    ))
+                                : Image.network(
+                                    widget.imgUrl,
+                                    height: 100,
+                                    width: 72,
+                                    fit: BoxFit.cover,
+                                  ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -97,14 +111,16 @@ class _CharacterState extends State<Character> {
                       Row(
                         children: [
                           FloatingActionButton(
+                            heroTag: null,
                             onPressed: decrementSpeed,
-                            tooltip: 'Decrementar Vida',
+                            tooltip: 'Diminuir Velocidade',
                             child: const Icon(Icons.remove),
                           ),
                           const SizedBox(width: 8),
                           FloatingActionButton(
-                            onPressed: incrementLife,
-                            tooltip: 'Incrementar Vida',
+                            heroTag: null,
+                            onPressed: incrementSpeed,
+                            tooltip: 'Aumentar Velocidade',
                             child: const Icon(Icons.add),
                           ),
                         ],

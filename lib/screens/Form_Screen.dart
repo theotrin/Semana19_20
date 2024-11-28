@@ -14,6 +14,7 @@ class _FormScreenState extends State<FormScreen> {
   TextEditingController characterNameController = TextEditingController();
   TextEditingController characterTypeController = TextEditingController();
   TextEditingController characterUrlController = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -90,11 +91,12 @@ class _FormScreenState extends State<FormScreen> {
                         }
                         return null;
                       },
+                      keyboardType: TextInputType.url,
                       controller: characterUrlController,
                       textAlign: TextAlign.center,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        hintText: 'Foto (URL)',
+                        hintText: 'Imagem (URL)',
                         fillColor: Colors.white70,
                         filled: true,
                       ),
@@ -131,6 +133,11 @@ class _FormScreenState extends State<FormScreen> {
                   ElevatedButton(
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        CharacterInherited.of(widget.characterContext)!
+                            .addCharacter(
+                                characterNameController.text,
+                                characterTypeController.text,
+                                characterUrlController.text);
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Salvando novo personagem...'),

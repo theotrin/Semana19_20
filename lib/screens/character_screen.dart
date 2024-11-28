@@ -16,11 +16,16 @@ class _CharacterScreenState extends State<CharacterScreen> {
     return Scaffold(
         appBar: AppBar(
           title: const Text('Personagens Sonic'),
+          leading: const Icon(Icons.add_task),
         ),
-        body: ListView(
-          children: CharacterInherited.of(context)!.characterList,
+        body: Container(
+          child: ListView(
+            children: CharacterInherited.of(context)!.characterList,
+            padding: EdgeInsets.only(top: 8, bottom: 70),
+          ),
         ),
         floatingActionButton: FloatingActionButton(
+          heroTag: null,
           onPressed: () {
             Navigator.push(
               context,

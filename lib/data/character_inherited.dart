@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 class CharacterInherited extends InheritedWidget {
   CharacterInherited({super.key, required this.child}) : super(child: child);
 
-  final List<Character> characterList = [
-    Character("Sonic", "Velocidade", "assets/images/sonic.jpg"),
+  final List<Character> characterList =  [
+    Character('Sonic', 'Velocidade', 'assets/images/sonic.jpg'),
     Character("Shadow", "Velocidade", "assets/images/shadow.jpg"),
     Character("Amy", "Força", "assets/images/amy.jpg"),
     Character("Tails", "Voador", "assets/images/tails.jpg"),
