@@ -1,5 +1,6 @@
 import 'package:challenger/components/character.dart';
 import 'package:challenger/screens/CharacterScreen.dart';
+import 'package:challenger/screens/Form_Screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -14,6 +15,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         theme: ThemeData(primarySwatch: Colors.blue),
-        home: CharacterScreen());
+        home: const FormScreen());
   }
 }
